@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+    - name: get ip info
+      command: ip a
+      register: ip_info
+    - debug: var=ip_info.stdout_lines | last
