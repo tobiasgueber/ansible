@@ -10,7 +10,7 @@
       upgrade: dist
       update_cache: yes
 
-- hosts: server_group_one
+- hosts: all
   become: true
   tasks:
 
@@ -27,10 +27,11 @@
   become: true
   tasks:
 
-  - name: install mariadb package
-    tags: mariadb, ubuntu
-    package:
-      name:
-        - mariadb-server
-      state: latest
-    when: ansible_distribution == "Ubuntu"
+  - name: copy default site html file
+    tags: html
+    copy:
+      src: default_site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
